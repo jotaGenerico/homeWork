@@ -1,0 +1,1 @@
+ls -mp1 --time-style=+%s | sort -n -k2 | sed -e 's/^\(.*\/\)$/\1/' -e 's/^[^/].*$/&/' | tr '\n' ',' | sed 's/,$/\n/'

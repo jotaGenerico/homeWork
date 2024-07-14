@@ -1,0 +1,35 @@
+void ft_putchar(char c);
+
+void rush(int x, int y) {
+    int linha = 0;
+    int coluna = 0;
+
+    if (x <= 0 || y <= 0){
+        return;
+    }
+
+    while(linha < x) {
+
+        while(coluna < y) {
+            if ((coluna == 0 && linha == 0) || (coluna == y - 1 && linha == 0) || (coluna == 0 && linha == x - 1) || (coluna == y - 1 && linha == x - 1)){
+                ft_putchar('o');
+            }
+            else if (linha == 0 || linha == x - 1){
+                ft_putchar('-');
+            }
+            else if (coluna == 0 || coluna == y - 1){
+                ft_putchar('|');
+            }
+            else{
+                ft_putchar(' ');
+            }
+
+            coluna++;
+        }
+        linha++;
+
+        coluna = 0;
+
+        ft_putchar('\n');
+    }
+}
