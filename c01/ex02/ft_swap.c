@@ -1,10 +1,10 @@
-#include <unistd.h>
+void	ft_swap(int *a, int *b);
 
-void ft_swap(int *a, int *b);
+void	ft_swap(int *a, int *b)
+{
+	int	temp;
 
-void ft_swap(int *a, int *b){
-	int temp = *a;
+	temp = *a;
 	*a = *b;
 	*b = temp;
 }
-	
