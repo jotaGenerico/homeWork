@@ -6,14 +6,6 @@ void	ft_putnbr(int nb)
 {
 	char	digit;
 
-	#include <unistd.h>
-
-void	ft_putnbr(int nb);
-
-void	ft_putnbr(int nb)
-{
-	char	digit;
-
 	if (nb < 0)
 	{
 		write(1, "-", 1);
