@@ -8,7 +8,7 @@ int	ft_str_is_uppercase(char *str)
 	{
 		if (!(*str >= 'A' && *str <= 'Z'))
 			return (0);
-		str++
+		str++;
 	}
 	return (1);
 }
