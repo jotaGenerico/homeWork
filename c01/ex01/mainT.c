@@ -14,9 +14,12 @@ int main() {
 	int ********ptr8 = &ptr7;
 	int *********ptr9 = &ptr8;
 
+
+	printf("antes: %d\n", number);
+
 	ft_ultimate_ft(ptr9);
 
-	printf("Value of number: %d\n", number); // Saída: 42
+	printf("depois: %d\n", number);
 
 	return 0;
 }
