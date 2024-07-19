@@ -1,8 +1,10 @@
-char *ft_strlowcase(char *str)
-{
-	char *ptr;
+char	*ft_strlowcase(char *str);
 
-	ptr = str;
+char	*ft_strlowcase(char *str)
+{
+	char	*ptr;
+
+	*ptr = str;
 	while (*ptr != '\0')
 	{
 		if (*ptr >= 'A' && *ptr <= 'Z')
