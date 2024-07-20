@@ -1,0 +1,20 @@
+Entendo que você precisa implementar um programa para resolver o puzzle "Skyscrapers" em uma grade 4x4. Vou fornecer uma estrutura básica e algumas dicas para ajudar você a começar. Lembre-se de que você deve implementar a lógica de resolução por conta própria.
+
+Aqui está uma estrutura básica para começar:
+
+Dicas para implementação:
+
+Parsing de argumentos:
+Verifique se há exatamente 16 números entre 1 e 4.
+Converta os argumentos de string para inteiros e armazene-os no array clues.
+Função is_valid:
+Verifique se o número já existe na linha ou coluna atual.
+Implemente a lógica para verificar se o número satisfaz as dicas (clues) para a linha e coluna.
+Função solve:
+Use backtracking para tentar todas as combinações possíveis.
+Quando uma solução válida for encontrada, retorne 1.
+Otimização:
+Considere implementar técnicas de poda para melhorar a eficiência do algoritmo.
+Lembre-se de que este é apenas um esqueleto básico. Você precisará implementar a lógica de resolução do puzzle, incluindo a verificação das dicas (clues) e a garantia de que cada linha e coluna contenha apenas uma caixa de cada tamanho.
+
+Boa sorte com a implementação!

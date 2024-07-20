@@ -1,0 +1,26 @@
+Explicação das principais funções:
+
+parse_clues: Analisa a string de entrada e preenche o array clues.
+check_row e check_col: Verificam se um número já existe em uma linha ou coluna.
+check_view: Verifica se uma linha ou coluna satisfaz uma dica específica.
+check_views: Verifica todas as dicas para a grade completa.
+solve: Função principal de backtracking que tenta preencher a grade.
+A lógica principal está na função solve, que usa backtracking para tentar todas as combinações possíveis. Ela preenche a grade célula por célula, verificando a validade a cada passo. Quando a grade está completamente preenchida, ela verifica se todas as dicas são satisfeitas.
+
+Esta implementação deve resolver o puzzle corretamente. Você pode compará-la com sua solução e ver onde pode melhorar ou ajustar sua lógica.
+
+Explicação geral:
+Este programa resolve um puzzle "Skyscrapers" em uma grade 4x4. O objetivo é preencher a grade com números de 1 a 4, de modo que cada número apareça apenas uma vez em cada linha e coluna, e que satisfaça as "dicas" dadas para cada linha e coluna (quantos arranha-céus são visíveis de cada direção).
+
+O programa usa uma abordagem de backtracking para tentar todas as combinações possíveis até encontrar uma solução válida.
+
+Agora, aqui está o código com as principais funções comentadas:
+
+As funções principais são:
+
+solve: Implementa o algoritmo de backtracking para preencher a grade.
+check_views: Verifica se todas as dicas são satisfeitas pela grade atual.
+check_view: Verifica se uma linha ou coluna específica satisfaz sua dica.
+check_row e check_col: Verificam se um número pode ser colocado em uma linha ou coluna.
+parse_clues: Analisa a string de entrada para extrair as dicas.
+O programa começa no main, onde as dicas são analisadas e a função solve é chamada para tentar resolver o puzzle. Se uma solução é encontrada, ela é impressa; caso contrário, uma mensagem de erro é exibida.
