@@ -1,0 +1,8 @@
+Agora, algumas explicações sobre o arquivo de cabeçalho (rush01.h):
+
+Começamos com uma diretiva de pré-processador #ifndef RUSH01_H. Isso evita inclusões múltiplas do mesmo arquivo.
+Definimos RUSH01_H se ainda não estiver definido.
+Incluímos as bibliotecas necessárias.
+Declaramos todas as funções que serão usadas em vários arquivos.
+Terminamos com #endif para fechar a diretiva #ifndef.
+Para compilar este projeto com múltiplos arquivos, você pode usar o seguinte comando:
