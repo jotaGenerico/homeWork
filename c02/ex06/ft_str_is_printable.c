@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_str_is_printable.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jose-cda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 16:25:20 by jose-cda          #+#    #+#             */
+/*   Updated: 2024/07/19 16:25:53 by jose-cda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 int	ft_str_is_printable(char *str);
 
 int	ft_str_is_printable(char *str)
@@ -5,8 +17,8 @@ int	ft_str_is_printable(char *str)
 	while (*str != '\0')
 	{
 		if (*str < 32 || *str > 126)
-			return 0;
+			return (0);
 		str++;
 	}
-	return 1;
+	return (1);
 }
