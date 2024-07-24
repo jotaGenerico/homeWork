@@ -1,35 +1,53 @@
-int ft_atoi_base(char *str, char *base) {
-	int result = 0;
-	int base_len = 0;
-	while (base[base_len] != '\0') {
+#include <unistd.h>
+
+void	ft_putchar(char c);
+
+int	ft_atoi_base(char	*str, char	*base)
+{
+	int	index;
+	int	result;
+	int	str_len;
+	int	base_len;
+	int	digit;
+	int	power;
+	int	base_index;
+
+	result = 0;
+	base_len = 0;
+	while (base[base_len] != '\0')
 		base_len++;
-	}
-
-	int str_len = 0;
-	while (str[str_len] != '\0') {
+	str_len = 0;
+	while (str[str_len] != '\0')
 		str_len++;
-	}
+	index = 0;
+	while (str[index] != '\0')
+	{
+		digit = 0;
+		power = 1;
+		base_index = 0;
 
-	int indice = 0;
-	while (str[indice] != '\0') {
-		int digit = 0;
-		int power = 1;
-		int base_indice = 0;
-		while (base[base_indice] != '\0' && base[base_indice] != str[indice]) {
-			base_indice++;
-		}
-		if (base_indice == base_len) {
-			return 0;
-		}
+        while (base[base_index] != '\0' && base[base_index] != str[index]) {
+            base_index++;
+        }
 
-		for (int i = str_len - 1; i > indice; i--) {
-			power *= base_len;
-		}
+        if (base_index == base_len) {
+            return 0;
+        }
 
-		digit = base_indice * power;
-		result += digit;
-		indice++;
-	}
+        int i = str_len - 1;
+        while (i > index) {
+            power *= base_len;
+            i--;
+        }
 
-	return result;
+        digit = base_index * power;
+        result += digit;
+        index++;
+    }
+
+    return result;
+}
+
+void ft_putchar(char c) {
+    write(1, &c, 1);
 }
