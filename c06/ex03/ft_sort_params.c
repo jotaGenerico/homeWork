@@ -1,53 +1,81 @@
 #include <unistd.h>
 
-void putchar(char c) {
-	write(1, &c, 1);
-}
+void	ft_print_arg(char *arg);
+void	ft_insertion_sort(int num_args, char **args);
+int		ft_strlen(char *arg);
+int		ft_strcmp(char *str1, char *str2);
 
-int strlen(const char *str) {
-	int len = 0;
-	while (str[len] != '\0') {
-		len++;
+int main(int argc, char **argv)
+{
+	int	i;
+
+	i = 1;
+	if (argc < 2)
+		return (0);
+	ft_insertion_sort(argc, argv);
+	while (i < argc)
+	{
+	ft_print_arg(argv[i++]);
 	}
-	return len;
+	return (0);
 }
 
-int strcmp(const char *s1, const char *s2) {
-	while (*s1 && (*s1 == *s2)) {
-		s1++;
-		s2++;
-	}
-	return *(unsigned char *)s1 - *(unsigned char *)s2;
+void	ft_print_arg(char *arg)
+{
+	write(1, arg, ft_strlen(arg));
+	write(1, "\n", 1);
 }
 
-void print_arg(const char *arg) {
-	int i = 0;
-	while (arg[i] != '\0') {
-		putchar(arg[i]);
+int	ft_strlen(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (*arg)
+	{
 		i++;
+		arg++;
 	}
-	putchar('\n');
+	return (i);
 }
 
-int main(int argc, char *argv[]) {
-	if (argc <= 1) {
-		return 0;
-	}
-
-	int i = 1;
-	while (i < argc) {
-		int j = i + 1;
-		while (j < argc) {
-			if (strcmp(argv[i], argv[j]) > 0) {
-				char *temp = argv[i];
-				argv[i] = argv[j];
-				argv[j] = temp;
-			}
-			j++;
+int	ft_strcmp(char *str1, char *str2)
+{
+	while (*str1 && *str2)
+	{
+		if (*str1 != *str2)
+		{
+			return (*str1 - *str2);
 		}
-		print_arg(argv[i]);
-		i++;
+		str1++;
+		str2++;
 	}
 
-	return 0;
+	return (*str1 - *str2);
+}
+
+void	ft_insertion_sort(int num_args, char **args)
+{
+	char	*temp;
+	int		i;
+	int		j;
+
+	i = 2;
+	while (i < num_args)
+	{
+		j = i;
+		while (j > 1)
+		{
+			if (ft_strcmp(args[j], args[j - 1]) < 0)
+			{
+				temp = args[j - 1];
+				args[j - 1] = args[j];
+				args[j] = temp;
+			}
+			else
+				break ;
+			j--;
+		}
+		i++;
+	}
 }
