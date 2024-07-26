@@ -1,30 +1,26 @@
 #include <unistd.h>
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	if (argc > 1)
+	if (argc < 1)
+		return 0;
+	else
 	{
-		write(1, argv[i], 1);
-		i++;
-	}
-	ft_print_params(argc, argv);
-	return 0;
-}
+		int		i;
+		char	*args;
 
-void ft_print_params(int argc, char *argv[]) {
-	int i = 1;
-
-	void print_arg(char *arg) {
-		if (*arg != '\0') {
-			write(1, arg, 1);
-			print_arg(arg + 1);
-		} else {
+		i = 1;
+		args = argv[i];
+		while (i < argc)
+		{
+			while (*args)
+			{
+				write(1, args, 1);
+				args++;
+			}
 			write(1, "\n", 1);
+			args = argv[++i];
 		}
 	}
-
-	while (i < argc) {
-		print_arg(argv[i]);
-		i++;
-	}
+	return (0);
 }

@@ -12,6 +12,7 @@
 
 #include <unistd.h>
 
+<<<<<<< HEAD
 void	ft_print_program_name(char *program_name);
 
 int	main(int argc, char *argv[])
@@ -31,4 +32,21 @@ void	ft_print_program_name(char *program_name)
 		program_name++;
 	}
 	write(1, "\n", 1);
+=======
+int	main(int argc, char *argv[])
+{
+	char	*program_name;
+
+	program_name = argv[0];
+	if (argc > 0)
+	{
+		while (*program_name)
+		{
+			write(1, program_name, 1);
+			program_name++;
+		}
+		write(1, "\n", 1);
+	}
+	return (0);
+>>>>>>> 62ccf7295db39eec466c15c5e6791c860e42e0a2
 }

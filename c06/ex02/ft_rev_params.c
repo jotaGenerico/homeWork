@@ -1,21 +1,26 @@
 #include <unistd.h>
 
-void printchar(char c) {
-	write(1, &c, 1);
-}
+int	main(int argc, char *argv[])
+{
+	if (argc < 2)
+		return 0;
+	else
+	{
+		char	*args;
+		int		i;
 
-int main(int argc, char *argv[]) {
-	int i = argc - 1;
-
-	while (i > 0) {
-		char *arg = argv[i];
-		while (*arg != '\0') {
-			printchar(*arg);
-			arg++;
+		i = argc - 1;
+		args = argv[i];
+		while (i > 0)
+		{
+			while (*args)
+			{
+				write(1, args, 1);
+				args++;
+			}
+			write(1, "\n", 1);
+			args = argv[--i];
 		}
-		printchar('\n');
-		i--;
 	}
-
-	return 0;
+	return (0);
 }
