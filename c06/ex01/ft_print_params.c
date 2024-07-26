@@ -1,8 +1,12 @@
 #include <unistd.h>
 
-void ft_print_params(int argc, char *argv[]);
-
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
+	if (argc > 1)
+	{
+		write(1, argv[i], 1);
+		i++;
+	}
 	ft_print_params(argc, argv);
 	return 0;
 }
