@@ -29,9 +29,9 @@ int is_valid_number(char *str)
 	return 1;
 }
 
-long long ft_atoll(const char *str)
+unsigned long long ft_atoll(const char *str)
 {
-	long long result = 0;
+	unsigned long long result = 0;
 	int sign = 1;
 
 	while (*str == ' ' || (*str >= 9 && *str <= 13))

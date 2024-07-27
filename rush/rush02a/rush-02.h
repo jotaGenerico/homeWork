@@ -23,9 +23,10 @@ void process_number(char *number);
 void parse_line(char *line);
 int is_valid_number(char *str);
 void free_dict(void);
-long long ft_atoll(const char *str);
+unsigned long long ft_atoll(const char *str);
 void process_large_number(char *number);
-void print_number_word(long long num);
+void print_number_word(unsigned long long num);
 void print_triple(int triple, int scale);
+unsigned long long count_triples(char *number);
 
 #endif
