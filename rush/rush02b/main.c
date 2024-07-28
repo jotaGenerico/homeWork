@@ -29,9 +29,9 @@ void	validate_arguments(int argc, char **argv, char **dict_file, char **number)
 		*dict_file = argv[1];
 		*number = argv[2];
 	}
-	if (!is_valid_number(*number))
+	if (!ft_validar_nbr(*number))
 	{
-		ft_putstr("Error\n");
+		ft_error();
 		exit(1);
 	}
 }

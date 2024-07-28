@@ -1,0 +1,7 @@
+Claro, vou explicar o código main.c linha por linha:
+
+read_dict(dict_file);: Chama a função read_dict para ler o dicionário do arquivo especificado.
+process_number(number);: Chama a função process_number para processar o número fornecido.
+free_dict();: Libera a memória utilizada pelo dicionário.
+return (0);: Retorna 0 para indicar que o programa foi executado com sucesso.
+Espero que essa explicação tenha esclarecido o funcionamento do código main.c. Se tiver mais dúvidas ou precisar de mais detalhes, estou à disposição para ajudar!

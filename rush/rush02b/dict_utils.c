@@ -1,26 +1,30 @@
 #include "rush-02.h"
 
-void parse_line(char *line)
+void ft_analisar_linha(char *linha)
 {
 	int i;
-	int colon_pos;
+	int pos_dois_pontos;
 
 	i = 0;
-	colon_pos = -1;
-	while (line[i] && i < G_BUFFER_SIZE)
+	pos_dois_pontos = -1;
+	while (linha[i] && i < G_BUFFER_SIZE)
 	{
-		if (line[i] == ':')
+		if (linha[i] == ':')
 		{
-			colon_pos = i;
+			pos_dois_pontos = i;
 			break;
 		}
 		i++;
 	}
-	if (colon_pos == -1 || dict_size >= G_MAX_ENTRIES)
+	if (pos_dois_pontos == -1 || dict_size >= G_MAX_ENTRIES)
 		return;
-	dict[dict_size].number = line;
-	dict[dict_size].word = &line[colon_pos + 2];
-	line[colon_pos] = '\0';
+
+	int comprimento_numero = pos_dois_pontos;
+	dict[dict_size].comprimento_numero = comprimento_numero;
+
+	dict[dict_size].numero = linha;
+	dict[dict_size].palavra = &linha[pos_dois_pontos + 2];
+	linha[pos_dois_pontos] = '\0';
 	dict_size++;
 }
 

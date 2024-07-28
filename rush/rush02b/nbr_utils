@@ -1,0 +1,191 @@
+int ft_atoa(const char *valor) {
+	int resultado = 0;
+	int i = 0;
+
+	while (i < 3) {
+		resultado = resultado * 10 + (valor[i] - '0');
+		i++;
+	}
+	return resultado;
+}
+
+int ft_validar_nbr(char *str) {
+	int count = 0;
+
+	while (*str != '\0') {
+		if (*str < '0' || *str > '9') {
+			return -1;
+		ft_validar_nbr(char *str)}
+		count++;
+		if (count > 40) {
+			return -1;
+		}
+		str++;
+	}
+
+	if (count == 0) {
+		return -1;
+	}
+
+	return 1;
+}
+
+typedef enum Escala {
+	UNIDADES,
+	DEZENAS,
+	CENTENAS,
+	MILHARES,
+	MILHOES,
+	BILHOES,
+	TRILHOES,
+	QUATRILHOES,
+	QUINTILHOES,
+	SEXTILHOES,
+	SEPTILHOES,
+	OCTILHOES,
+	NONILHOES,
+	DECILHOES,
+	UNDECILHOES
+} Escala;
+
+void classificar_escala(char *numero, char **numero_escala, char **numero_restante) {
+	Escala escala;
+	int comprimento = ft_strlen(numero);
+	int i = 0;
+
+	if (comprimento == 1) {
+		escala = UNIDADES;
+	} else if (comprimento <= 3) {
+		escala = CENTENAS;
+	} else if (comprimento <= 6) {
+		escala = MILHARES;
+	} else if (comprimento <= 9) {
+		escala = MILHOES;
+	} else if (comprimento <= 12) {
+		escala = BILHOES;
+	} else if (comprimento <= 15) {
+		escala = TRILHOES;
+	} else if (comprimento <= 18) {
+		escala = QUATRILHOES;
+	} else if (comprimento <= 21) {
+		escala = QUINTILHOES;
+	} else if (comprimento <= 24) {
+		escala = SEXTILHOES;
+	} else if (comprimento <= 27) {
+		escala = SEPTILHOES;
+	} else if (comprimento <= 30) {
+		escala = OCTILHOES;
+	} else if (comprimento <= 33) {
+		escala = NONILHOES;
+	} else if (comprimento <= 36) {
+		escala = DECILHOES;
+	} else {
+		escala = UNDECILHOES;
+	}
+
+void ft_validar_escala(char *numero, Escala *escala, char **numero_restante) {
+	int comprimento = ft_strlen(numero);
+	int i = 0;
+
+	if (comprimento == 1) {
+		*escala = UNIDADES;
+	} else if (comprimento <= 3) {
+		*escala = CENTENAS;
+	} else if (comprimento <= 6) {
+		*escala = MILHARES;
+	} else if (comprimento <= 9) {
+		*escala = MILHOES;
+	} else if (comprimento <= 12) {
+		*escala = BILHOES;
+	} else if (comprimento <= 15) {
+		*escala = TRILHOES;
+	} else if (comprimento <= 18) {
+		*escala = QUATRILHOES;
+	} else if (comprimento <= 21) {
+		*escala = QUINTILHOES;
+	} else if (comprimento <= 24) {
+		*escala = SEXTILHOES;
+	} else if (comprimento <= 27) {
+		*escala = SEPTILHOES;
+	} else if (comprimento <= 30) {
+		*escala = OCTILHOES;
+	} else if (comprimento <= 33) {
+		*escala = NONILHOES;
+	} else if (comprimento <= 36) {
+		*escala = DECILHOES;
+	} else {
+		*escala = UNDECILHOES;
+	}
+
+	*numero_restante = (char *)malloc((comprimento - *escala) + 1 * sizeof(char));
+
+	while (i < comprimento - *escala) {
+		(*numero_restante)[i] = numero[*escala + i];
+		i++;
+	}
+	(*numero_restante)[comprimento - *escala] = '\0';
+}
+
+void decompor_numero_escala(char *numero, Escala escala) {
+	int tamanho_numero = strlen(numero);
+
+	int inicio = tamanho_numero - (escala + 1) * 3;
+	if (inicio < 0) {
+		inicio = 0;
+	}
+
+	char parte[4] = {0};
+	for (int i = inicio; i < tamanho_numero; i++) {
+		parte[i - inicio] = numero[i];
+	}
+
+	int valor = atoi(parte);
+	//vai la em cima escreve logo o atoi idiota
+}
+
+
+// vai la e trabalhe nessa ideia, falta bem pouco seu idiota
+// Função para extrair os dígitos relevantes da escala atual
+void extrairDigitosEscala(const char *numero, const char *escalaCheia, char *resultado) {
+	int lenNumero = strlen(numero);
+	int lenEscala = strlen(escalaCheia);
+	int diff = lenNumero - lenEscala;
+
+	if (diff < 0) {
+		// O número é menor que a escala, preenche com zeros à esquerda
+		sprintf(resultado, "%0*d", lenEscala, 0);
+		strncpy(resultado + (lenEscala - lenNumero), numero, lenNumero);
+	} else {
+		// Extrai os dígitos relevantes
+		strncpy(resultado, numero + diff, lenEscala);
+		resultado[lenEscala] = '\0';
+	}
+}
+
+void preencherZeros(char *numero) {
+	int len = strlen(numero);
+	int escala = 3; // Assume-se que a escala é de 3 em 3 dígitos
+	int zerosNecessarios = escala - (len % escala);
+
+	if (zerosNecessarios == escala) {
+		return; // Não precisa adicionar zeros
+	}
+
+	// Aloca espaço para os zeros adicionais
+	char *novoNumero = (char *)malloc(len + zerosNecessarios + 1);
+
+	// Preenche com zeros
+	int i = 0;
+	while (i < zerosNecessarios) {
+		novoNumero[i] = '0';
+		i++;
+	}
+
+	// Copia o número original
+	strcpy(novoNumero + zerosNecessarios, numero);
+
+	// Copia o novo número de volta para o original
+	strcpy(numero, novoNumero);
+
+	free(novoNumero);
+}
