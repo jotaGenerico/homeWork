@@ -1,5 +1,4 @@
 #include <stdlib.h>
-//#include <stdio.h>
 
 char	*ft_add_word(char *src, int size)
 {

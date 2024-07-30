@@ -25,8 +25,7 @@ int	ft_atoi_base(char *str, char *base)
 	long	nb;
 
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v'))
+	while (str[i] && (str[i] == ' ' || str[i] >= 9 || str[i] <= 13))
 		i++;
 	sign = 1;
 	while (str[i] && (str[i] == '-' || str[i] == '+'))

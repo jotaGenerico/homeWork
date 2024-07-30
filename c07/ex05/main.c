@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <stdio.h> // Lembre-se de remover o comentário para incluir a biblioteca stdio.h
+#include <stdio.h>
 
 char *ft_add_word(char *src, int size);
 int ft_is_charset(char c, char *charset);
@@ -20,11 +20,11 @@ int main()
 		while (result[i] != NULL)
 		{
 			printf("%s\n", result[i]);
-			free(result[i]); // Libere a memória alocada para cada palavra
+			free(result[i]);
 			i++;
 		}
 
-		free(result); // Libere a memória alocada para o array de palavras
+		free(result);
 	}
 	else
 	{

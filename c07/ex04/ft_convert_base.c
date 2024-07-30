@@ -26,8 +26,7 @@ int	ft_checkbase(char *str)
 	{
 		if (str[i] == '+' || str[i] == '-')
 			return (0);
-		if (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-			|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+		if (str[i] == ' ' || str[i] >= 9 || str[i] <= 13)
 			return (0);
 		while (j < i)
 		{
