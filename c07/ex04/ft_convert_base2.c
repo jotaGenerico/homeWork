@@ -1,15 +1,64 @@
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_convert_base2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jose-cda <jose-cda@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/30 12:07:45 by jose-cda          #+#    #+#             */
+/*   Updated: 2024/07/30 12:07:50 by jose-cda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		ft_strlen(char *str);
-int		ft_checkbase(char *str);
-char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
+int	is_space(char c)
+{
+	char	*space;
 
-int	ft_find_index(char c, char *base)
+	space = " \n\t\v\f\r";
+	while (*space != '\0')
+	{
+		if (c == *space)
+			return (1);
+		space++;
+	}
+	return (0);
+}
+
+int	base_check(char *base)
+{
+	int	len;
+	int	i;
+	int	j;
+
+	len = 0;
+	i = 0;
+	j = 0;
+	while (base[len] != '\0')
+	{
+		if (is_space(base[len]) || base[len] == '-' || base[len] == '+')
+			return (0);
+		len++;
+	}
+	while (i < len - 1)
+	{
+		j = i + 1;
+		while (j < len)
+		{
+			if (base[i] == base[j])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (len);
+}
+
+int	find_base(char *base, char c)
 {
 	int	i;
 
 	i = 0;
-	while (base[i])
+	while (base[i] != '\0')
 	{
 		if (base[i] == c)
 			return (i);
@@ -18,73 +67,19 @@ int	ft_find_index(char c, char *base)
 	return (-1);
 }
 
-int	ft_atoi_base(char *str, char *base)
+int	nbr_len(int nbr, int len)
 {
-	int		i;
-	int		sign;
-	long	nb;
+	int	cnt;
 
-	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] >= 9 || str[i] <= 13))
-		i++;
-	sign = 1;
-	while (str[i] && (str[i] == '-' || str[i] == '+'))
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	nb = 0;
-	while (str[i] && ft_find_index(str[i], base) >= 0)
-	{
-		nb = nb * ft_strlen(base) + ft_find_index(str[i], base);
-		i++;
-	}
-	return (nb * sign);
-}
-
-int	ft_nbrlen(long nbr, int base_len)
-{
-	int	i;
-
-	i = 0;
+	cnt = 0;
 	if (nbr == 0)
 		return (1);
 	if (nbr < 0)
+		cnt++;
+	while (nbr != 0)
 	{
-		nbr *= -1;
-		i++;
+		cnt++;
+		nbr /= len;
 	}
-	while (nbr > 0)
-	{
-		nbr /= base_len;
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_putnbr(long nbr, char *base, int nb_size)
-{
-	char	*result;
-	int		i;
-
-	i = 0;
-	result = malloc(sizeof(char) * (nb_size + 1));
-	if (nbr == 0)
-		result[0] = base[nbr % ft_strlen(base)];
-	if (!result)
-		return (0);
-	if (nbr < 0)
-	{
-		result[0] = '-';
-		nbr *= -1;
-	}
-	while (nbr > 0)
-	{
-		result[(nb_size - 1) - i] = base[nbr % ft_strlen(base)];
-		nbr /= ft_strlen(base);
-		i++;
-	}
-	result[nb_size] = '\0';
-	return (result);
+	return (cnt);
 }

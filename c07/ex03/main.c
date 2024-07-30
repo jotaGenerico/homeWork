@@ -18,7 +18,7 @@ int main()
 	{
 		printf("Texto concatenado: %s\n", result);
 
-		free(result); // Não se esqueça de liberar a memória alocada
+		free(result);
 	}
 	else
 	{

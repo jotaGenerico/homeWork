@@ -9,8 +9,8 @@ char **ft_split(char *str, char *charset);
 
 int main()
 {
-	char *str = "Hello,world,,from,the,other,side";
-	char *charset = ",";
+	char *str = "Hello,;-world,,from,the;other,side";
+	char *charset = "-,;";
 
 	char **result = ft_split(str, charset);
 
