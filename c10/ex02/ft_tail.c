@@ -22,8 +22,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	n = ft_atoll(argv[2]);
-	if (n < 0)
-	{
 		ft_putstr_fd(2, "ft_tail: illegal offset -- ");
 		ft_putstr_fd(2, argv[2]);
 		ft_putstr_fd(2, "\n");
