@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose-cda <jose-cda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 09:31:52 by jose-cda          #+#    #+#             */
-/*   Updated: 2024/07/30 09:54:17 by jose-cda         ###   ########.fr       */
+/*   Created: 2024/07/31 09:20:51 by jose-cda          #+#    #+#             */
+/*   Updated: 2024/07/31 09:21:29 by jose-cda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 int	*ft_range(int min, int max)
 {
-	int	*vet;
-	int	i;
+	int		i;
+	int		arr_size;
+	int		*arr;
 
-	vet = NULL;
 	if (min >= max)
-		return (0);
-	vet = malloc(sizeof(int) * (max - min));
-	if (!vet)
-		return (0);
+		return (NULL);
+	arr_size = max - min;
+	arr = (int *)malloc(sizeof(int) * (arr_size));
+	if (arr == NULL)
+		return (NULL);
 	i = 0;
-	while (i < (max - min))
+	while (max > min)
 	{
-		vet[i] = max - i -1;
+		arr[i] = min;
+		min++;
 		i++;
 	}
-	return (vet);
+	return (arr);
 }
