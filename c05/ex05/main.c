@@ -3,7 +3,7 @@
 int ft_sqrt(int nb);
 
 int main(void) {
-	int number = 42;
+	int number = 100;
 	int square_root = ft_sqrt(number);
 
 	printf("A raiz quadrada de %d é: %d\n", number, square_root);

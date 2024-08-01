@@ -3,29 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-cda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jose-cda <jose-cda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 12:22:22 by jose-cda          #+#    #+#             */
-/*   Updated: 2024/07/25 12:22:27 by jose-cda         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:05:54 by jose-cda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_is_prime(int nb)
 {
-	int	divisor;
+	int	i;
 
-	divisor = 3;
+	i = 2;
 	if (nb <= 1)
 		return (0);
-	if (nb == 2)
-		return (1);
-	if (nb % 2 == 0)
-		return (0);
-	while (divisor <= nb / divisor)
+	while (i <= nb / i)
 	{
-		if (nb % divisor == 0)
+		if (nb % i == 0)
 			return (0);
-		divisor += 2;
+		i++;
 	}
 	return (1);
 }
