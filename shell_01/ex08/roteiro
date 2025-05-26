@@ -1,0 +1,54 @@
+Com prazer! Vamos detalhar o seu comando genial para add_chelou.sh:
+
+Bash
+
+echo "$FT_NBR1 + $FT_NBR2" | sed "s/'/0/g" | tr '\\"?!' 1234 | tr mrdoc 01234 | xargs echo 'obase=13; ibase=5;' | bc | tr 0123456789ABC 'gtaio luSnemf'
+echo "$FT_NBR1 + $FT_NBR2":
+
+Este comando pega o valor das variáveis de ambiente FT_NBR1 e FT_NBR2 e as imprime na saída padrão, separadas por um sinal de +. Por exemplo, se FT_NBR1 for '?"\"' e FT_NBR2 for rcrdmddd, a saída será '?"\" + rcrdmddd. As aspas duplas em torno das variáveis garantem que a string seja tratada como um único argumento, mesmo que contenha espaços (o que não é o caso aqui).
+| sed "s/'/0/g":
+
+A saída do echo é enviada para o sed.
+sed "s/'/0/g" substitui todas as ocorrências (g) do caractere aspas simples (') por 0. Isso é um passo preparatório para a "conversão" numérica.
+| tr '\\"?!' 1234:
+
+A saída do sed é enviada para o tr (translate).
+tr '\\"?!' 1234 translitera os caracteres:
+\ (barra invertida) é traduzido para 1
+" (aspas duplas) é traduzido para 2
+? (ponto de interrogação) é traduzido para 3
+! (ponto de exclamação) é traduzido para 4 Note que a barra invertida aqui está escapando as aspas duplas para que sejam tratadas literalmente pelo tr.
+| tr mrdoc 01234:
+
+A saída do tr anterior é enviada para outro tr.
+tr mrdoc 01234 translitera os caracteres da base 'mrdoc' para os dígitos 0-4:
+m para 0
+r para 1
+d para 2
+o para 3
+c para 4
+| xargs echo 'obase=13; ibase=5;':
+
+A saída do segundo tr (que agora é uma representação numérica dos valores das bases) é passada para o xargs.
+xargs echo 'obase=13; ibase=5;' pega essa saída e a usa como argumento para o comando echo 'obase=13; ibase=5;'. Essencialmente, ele precede a representação numérica com a string 'obase=13; ibase=5;'. Isso prepara a entrada para o bc (basic calculator) para realizar a soma na base de entrada (ibase=5) e converter o resultado para a base de saída (obase=13).
+| bc:
+
+A saída do xargs echo é enviada para o bc.
+O bc interpreta a entrada. Ele primeiro define a base de saída como 13 e a base de entrada como 5. Em seguida, ele tenta avaliar a expressão numérica que veio do passo anterior (a representação numérica de $FT_NBR1 + $FT_NBR2). O resultado da soma (em base 10 internamente, depois convertido para base 13) é enviado para a saída.
+| tr 0123456789ABC 'gtaio luSnemf':
+
+A saída do bc (o resultado da soma em base 13, representado com dígitos 0-9 e letras A-C) é enviada para o último tr.
+tr 0123456789ABC 'gtaio luSnemf' translitera os dígitos e letras da base 13 para os caracteres da base 'gtaio luSnemf' na ordem correspondente:
+0 para g
+1 para t
+2 para a
+3 para i
+4 para o
+5 para (espaço)
+6 para l
+7 para u
+8 para S
+9 para n
+A para e
+B para m
+C para f (já que a base de saída do bc foi definida como 13).

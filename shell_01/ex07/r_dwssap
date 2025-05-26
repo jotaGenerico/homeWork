@@ -1,0 +1,2 @@
+#!/bin/bash
+cat /etc/passwd | grep -v '^#' | sed -n "$FT_LINE1,$FT_LINE2 p" | sed -n '2~2p' | awk -F':' '{ s = $1; for (i=length(s); i>=1; i--) r = r substr(s, i, 1); logins[NR] = r; r="" } END { sep=""; for (i in logins) { printf "%s%s", sep, logins[i]; sep=", " }; print "." }'

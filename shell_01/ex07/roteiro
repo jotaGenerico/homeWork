@@ -1,0 +1,20 @@
+cat /etc/passwd: Envia o conteúdo do arquivo de usuários para a saída.
+
+| grep -v '^#': Filtra a saída, removendo as linhas que começam com # (comentários).
+
+| sed -n "$FT_LINE1,$FT_LINE2 p": Seleciona e imprime apenas as linhas dentro do intervalo definido pelas variáveis de ambiente $FT_LINE1 e $FT_LINE2 (inclusive).
+
+| sed -n '2~2p': Da saída anterior, seleciona e imprime uma linha a cada duas, começando pela segunda linha.
+
+| awk -F':' '{ s = $1; for (i=length(s); i>=1; i--) r = r substr(s, i, 1); logins[NR] = r; r="" } END { sep=""; for (i in logins) { printf "%s%s", sep, logins[i]; sep=", " }; print "." }': Processa a saída linha por linha e, ao final, formata a saída:
+
+-F':': Define o delimitador de campos como :.
+'{ s = $1; for (i=length(s); i>=1; i--) r = r substr(s, i, 1); logins[NR] = r; r="" }': Para cada linha de entrada:
+s = $1: Armazena o primeiro campo (o login) na variável s.
+for (i=length(s); i>=1; i--) r = r substr(s, i, 1): Inverte a string s (o login) e armazena o resultado em r.
+logins[NR] = r: Armazena o login invertido no array logins com o número da linha como índice.
+r = "": Limpa a variável r para a próxima iteração.
+END { sep=""; for (i in logins) { printf "%s%s", sep, logins[i]; sep=", " }; print "." }': Após processar todas as linhas:
+sep="": Inicializa o separador.
+for (i in logins) { printf "%s%s", sep, logins[i]; sep=", " }: Itera sobre os logins invertidos armazenados no array logins, imprimindo cada um deles seguido de ", ".
+print ".": Finalmente, imprime um ponto no final da linha.

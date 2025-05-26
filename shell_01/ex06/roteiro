@@ -1,0 +1,19 @@
+ls -l: Lista os arquivos e diretórios no formato longo.
+| awk 'NR%2!=0': Passa a saída do ls -l para o awk.
+awk: Um poderoso processador de texto baseado em padrões.
+'NR%2!=0': Este é o programa awk:
+NR: É uma variável interna do awk que representa o número da linha atual.
+%: É o operador módulo (resto da divisão).
+2: O divisor.
+!=0: Verifica se o resto da divisão de NR por 2 não é zero.
+
+gemini
+Explicação:
+
+ls -l: Lista os arquivos e diretórios no formato longo.
+| sed -n '1~2p': Passa a saída do ls -l para o sed.
+-n: Suprime a saída automática de cada linha processada.
+'1~2p': Este é o comando sed:
+1: Começa a partir da primeira linha.
+~2: Pula a cada 2 linhas (ou seja, pega a primeira, pula a segunda, pega a terceira, pula a quarta, e assim por diante).
+p: Imprime a linha correspondente.

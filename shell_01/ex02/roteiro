@@ -1,0 +1,10 @@
+find . -name "*.sh" -print0:
+
+find .: Procura a partir do diretório atual (.).
+-name "*.sh": Filtra para encontrar apenas arquivos cujos nomes terminam com ".sh".
+-print0: Imprime os resultados separados por um caractere nulo. Isso é mais seguro para lidar com nomes de arquivos que contenham espaços ou outros caracteres especiais.
+| xargs -0 -n 1 basename -s .sh:
+
+xargs -0: Lê os itens da entrada padrão, que são separados por caracteres nulos (como produzido por -print0 do find).
+-n 1: Executa o comando seguinte (basename) para cada item encontrado.
+basename -s .sh: Extrai o nome base de um caminho de arquivo, removendo o sufixo ".sh" (especificado com -s .sh).

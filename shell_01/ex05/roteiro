@@ -1,0 +1,22 @@
+criaçao
+echo -n 42 > \"\\\?\$\*\'MaRViN\'\*\$\?\\\"
+
+permissoes
+chmod 614 nome_arquivo
+
+data
+touch -t 202510021221 nome_arquivo
+
+
+E os valores numéricos para cada permissão são:
+
+r (leitura): 4
+w (escrita): 2
+x (execução): 1
+- (sem permissão): 0
+
+ordem
+tipo do arquivo
+Proprietário
+Grupo
+Outros

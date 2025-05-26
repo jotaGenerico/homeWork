@@ -1,0 +1,10 @@
+id -Gn "$FT_USER":
+
+id: Exibe informações sobre o usuário.
+-G: Imprime todos os IDs de grupo.
+-n: Exibe os nomes, em vez dos IDs numéricos.
+"$FT_USER": Passa o valor da variável de ambiente FT_USER para o id para obter as informações desse usuário específico. As aspas garantem que, se o nome de usuário contiver espaços (o que geralmente não acontece para logins), ele seja tratado como uma única unidade.
+| tr ' ' ',':
+
+tr: Traduz ou deleta caracteres.
+' ' ',': Substitui cada espaço na saída do id -Gn por uma vírgula.

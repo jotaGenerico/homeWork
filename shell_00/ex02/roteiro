@@ -1,0 +1,71 @@
+Criar as pastas:
+
+mkdir test0
+mkdir test2
+Criar os arquivos com conteúdo:
+
+echo "test1" > test1 (conteúdo de 4 bytes)
+echo "t" > test3 (conteúdo de 1 byte)
+echo "te" > test4 (conteúdo de 2 bytes)
+echo "t" > test5 (conteúdo de 1 byte)
+Ajustar as permissões:
+
+chmod 755 test0 (drwx--xr-x)
+chmod 744 test1 (-rwx--xr--)
+chmod 504 test2 (dr-x---r--)
+chmod 404 test3 (-r-----r--)
+chmod 645 test4 (-rw-r----x)
+chmod 404 test5 (-r-----r--)
+Criar os hard links:
+
+ln test3 test5 (faz test5 ser um hard link para test3)
+Isso fará com que test3 e test5 tenham o mesmo inode, e o contador de links aumentará para 2 para ambos.
+Criar o link simbólico:
+
+ln -s test0 test6 (cria um link simbólico chamado test6 que aponta para test0)
+O tamanho do link simbólico (test6 -> test0) será o número de caracteres no caminho alvo ("test0", que são 5).
+Verificação:
+
+Após executar todos esses comandos, rode ls -l na sua pasta. A saída deve corresponder ao exemplo fornecido no exercício, com as permissões, número de links e o link simbólico corretos.
+
+Finalização:
+
+Quando estiver tudo certo, execute o comando para criar o arquivo exo2.tar:
+
+Bash
+
+tar -cf exo2.tar *
+Este comando irá criar um arquivo tar chamado exo2.tar contendo todos os arquivos e pastas presentes no seu diretório atual.
+
+Este roteiro te ajuda a lembrar da ordem e do que precisa ser feito? Quer que eu detalhe algum passo específico?
+
+Para modificar a data de modificação de um arquivo sem alterar seu conteúdo ou tamanho, você pode usar o comando touch. A opção -t permite especificar uma data e hora.
+
+A sintaxe geral é:
+
+Bash
+
+touch -t AAAAMMDDhhmm.ss nome_do_arquivo
+Onde:
+
+AAAA: Ano (4 dígitos)
+MM: Mês (2 dígitos)
+DD: Dia (2 dígitos)
+hh: Hora (2 dígitos, formato 24 horas)
+mm: Minutos (2 dígitos)
+.ss: Segundos (opcional, 2 dígitos)
+No seu caso, o ls -l do exemplo mostra a data como "Jun 1 20:47" para test0, "Jun 1 21:46" para test1, e assim por diante, todos com "Jun 1" e horários diferentes. O ano não está especificado, então podemos usar o ano atual.
+
+Ordem de execução:
+
+A ordem em que você cria os arquivos e modifica suas datas geralmente não afeta o tamanho dos bytes, desde que você não os edite após a criação inicial. Portanto, você pode criar os arquivos com o conteúdo desejado primeiro e depois ajustar as datas.
+
+Exemplos de como usar o touch -t:
+
+Supondo que estamos no ano de 2025 (para o exemplo):
+
+Para test0 com a data "Jun 1 20:47":
+
+Bash
+
+touch -t 202506012047 test0

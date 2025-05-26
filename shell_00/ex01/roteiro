@@ -1,0 +1,29 @@
+Criar o arquivo testShell00 com um certo tamanho:
+O ls -l do exemplo mostra um tamanho de 40 bytes. Podemos criar um arquivo com esse tamanho usando, por exemplo, o comando truncate.
+
+Bash
+
+truncate -s 40 testShell00
+Este comando cria (se não existir) ou redimensiona o arquivo testShell00 para ter exatamente 40 bytes.
+
+Ajustar as permissões do arquivo:
+O ls -l do exemplo mostra as permissões -r--r-xr-x. Podemos definir essas permissões usando o chmod com a representação numérica ou simbólica. A representação numérica para essas permissões é 455 (proprietário tem leitura, outros têm leitura e execução).
+
+Bash
+
+chmod 455 testShell00
+Modificar a data de modificação (opcional, para corresponder ao exemplo):
+O exemplo mostra a data "Jun 1 23:42". Podemos usar o touch -t para definir essa data. Assumindo o ano atual (2025):
+
+Bash
+
+touch -t 202506012342 testShell00
+Verificar com ls -l:
+Execute ls -l na sua pasta para garantir que o arquivo testShell00 tenha as permissões, o tamanho (40 bytes) e a data (opcionalmente) corretos. A linha "total 1" pode variar dependendo do sistema de arquivos e de outros arquivos na pasta.
+
+Criar o arquivo tar para entrega:
+Finalmente, execute o comando para criar o arquivo testShell00.tar:
+
+Bash
+
+tar -cf testShell00.tar testShell00

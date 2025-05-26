@@ -1,0 +1,15 @@
+patch:
+
+Este é o comando base para aplicar um patch.
+a:
+
+Este argumento geralmente especifica o arquivo original ao qual o patch deve ser aplicado. No entanto, com a sintaxe utilizada aqui (e dependendo do conteúdo de sw.diff), o patch pode tentar identificar o arquivo a ser modificado diretamente a partir das informações contidas no arquivo de patch (sw.diff). Se o patch foi criado com informações sobre os arquivos originais, patch tentará encontrá-los.
+< sw.diff:
+
+O símbolo < indica uma redireção da entrada padrão.
+sw.diff é o arquivo que contém o "patch", ou seja, a descrição das diferenças entre a versão original de um arquivo e a versão modificada. O conteúdo deste arquivo será usado como entrada para o comando patch.
+-o b:
+
+Esta é uma opção do comando patch.
+-o: Especifica o nome do arquivo de saída. A versão modificada do arquivo (após a aplicação do patch) será escrita neste arquivo.
+b: O nome do arquivo onde a saída (o arquivo a modificado pelo patch) será gravada.

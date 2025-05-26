@@ -1,0 +1,13 @@
+git log:
+
+Este é o comando base para exibir o histórico de commits. Sem nenhuma opção, ele mostra os commits em ordem cronológica reversa (o commit mais recente primeiro), juntamente com informações como o hash do commit, informações do autor, data e a mensagem do commit.
+-n 5:
+
+Esta é uma opção que limita o número de commits exibidos.
+-n: Especifica o número de commits a serem mostrados.
+5: O número de commits que você quer ver. Neste caso, os 5 commits mais recentes.
+--pretty=format:"%H":
+
+Esta opção especifica o formato em que os commits serão exibidos.
+--pretty: Permite escolher um formato predefinido (como oneline, short, full, fuller) ou um formato personalizado usando format:.
+format:"%H": Define um formato personalizado onde %H é um placeholder que representa o hash SHA-1 completo do commit.

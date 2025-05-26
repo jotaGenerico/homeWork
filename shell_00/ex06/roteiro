@@ -1,0 +1,19 @@
+Certo, vamos analisar o comando:
+
+Bash
+
+git ls-files --others --ignored --exclude-from=.gitignore
+Este comando do Git lista arquivos no seu diretório de trabalho com base em certos critérios. Vamos detalhar cada opção:
+
+git ls-files:
+
+Este é o comando base para listar arquivos rastreados pelo Git. Sem opções, ele geralmente lista os arquivos que estão no índice (staging area) e os arquivos rastreados no último commit.
+--others:
+
+Esta opção faz com que o git ls-files liste arquivos no seu diretório de trabalho que não estão sendo rastreados pelo Git. São arquivos que não foram adicionados ao índice (git add) e não foram ignorados pelas regras do .gitignore.
+--ignored:
+
+Esta opção faz com que o git ls-files liste os arquivos que estão sendo ignorados pelo Git. Esses são os arquivos que correspondem a padrões definidos nos arquivos .gitignore.
+--exclude-from=.gitignore:
+
+Esta opção instrui o git ls-files a não levar em consideração as regras de exclusão definidas no arquivo .gitignore ao determinar quais arquivos listar. Normalmente, git ls-files respeitaria essas regras. Ao usar --exclude-from=.gitignore, estamos, de certa forma, pedindo para ver todos os arquivos --others e --ignored como se o .gitignore não existisse (para fins de determinação do status "ignored").

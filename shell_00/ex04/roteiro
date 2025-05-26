@@ -1,0 +1,53 @@
+ls -t ordena por data -tr ordena em ordem reversa
+ls -p: Lista arquivos e diretórios, com "/" após os diretórios
+grep -v "^\.": Remove entradas que começam com "." (arquivos ocultos)
+tr '\n' ',': Substitui quebras de linha por vírgulas
+sed 's/,/, /g': Adiciona um espaço após cada vírgula
+sed 's/, $/\n/': Remove a vírgula e espaço extras no final e adiciona quebra de linha
+
+
+
+1. ls -tp:
+
+ls: Lista os arquivos e diretórios.
+-t: Ordena pela hora da última modificação (mais recente primeiro).
+-p: Adiciona uma barra (/) ao final dos nomes dos diretórios.
+Saída desta etapa: Uma lista de arquivos e diretórios, um por linha, ordenada pela data de modificação (mais recente primeiro), com diretórios terminados em /.
+
+2. grep -v "^\.":
+
+grep: Filtra linhas que correspondem a um padrão.
+
+-v: Inverte a correspondência. Em vez de mostrar as linhas que correspondem ao padrão, ele mostra as linhas que não correspondem.
+
+"^\.": Este é o padrão de expressão regular que estamos procurando.
+
+^: Corresponde ao início da linha.
+\.: Corresponde ao caractere literal ponto (.). O ponto tem um significado especial em regex (corres
+ponde a qualquer caractere), então precisamos escapá-lo com uma barra invertida para que ele seja 
+interpretado como um ponto literal.
+Resultado desta etapa: A saída do ls -tp, mas removendo todas as linhas que começam com um ponto (.),
+ o que efetivamente exclui arquivos e diretórios ocultos (como .arquivo_oculto, ., .., etc.).
+
+3. tr '\n' ',':
+
+tr: Traduz ou deleta caracteres.
+'\n' ',': Substitui cada caractere de nova linha (\n) por uma vírgula (,).
+Resultado desta etapa: Toda a saída anterior é transformada em uma única linha, com os nomes dos
+ arquivos e diretórios separados por vírgulas.
+
+4. sed 's/,/, /g':
+
+sed: Stream editor para realizar transformações de texto.
+'s/,/, /g': Substitui todas as ocorrências (devido ao g no final) de uma vírgula (,) por uma vírgula
+ seguida de um espaço (,).
+Resultado desta etapa: A linha única da etapa anterior agora tem os nomes separados por vírgula e 
+um espaço.
+
+5. sed 's/, $/\n/':
+
+sed: Stream editor.
+'s/, $/\n/': Procura por uma vírgula seguida de um espaço no final da linha (,$) e substitui por uma 
+nova linha (\n). Isso serve para colocar o último item na sua própria linha, o que talvez não seja
+ o ideal se o objetivo é uma única linha separada por vírgula e espaço. Se quisermos manter tudo em
+  uma única linha, podemos remover este último sed.
