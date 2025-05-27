@@ -17,7 +17,7 @@ O exemplo mostra a data "Jun 1 23:42". Podemos usar o touch -t para definir essa
 
 Bash
 
-touch -t 202506012342 testShell00
+touch -t 202406012342 testShell00
 Verificar com ls -l:
 Execute ls -l na sua pasta para garantir que o arquivo testShell00 tenha as permissões, o tamanho (40 bytes) e a data (opcionalmente) corretos. A linha "total 1" pode variar dependendo do sistema de arquivos e de outros arquivos na pasta.
 
