@@ -1,7 +1,0 @@
-#!/bin/bash
-
-gemini
-ls -l | sed -n '1~2p'
-
-minha
-ls -l | awk 'NR%2!=0'
