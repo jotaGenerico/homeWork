@@ -1,0 +1,22 @@
+Explicação passo a passo:
+cat /etc/passwd - Exibe o conteúdo do arquivo /etc/passwd
+
+grep -v "^#" - Remove os comentários (linhas que começam com #)
+
+sed -n '2~2p' - Pega uma linha a cada duas começando pela segunda (linha 2, 4, 6, 8...)
+
+cut -d: -f1 - Extrai apenas o primeiro campo (login) usando ":" como delimitador
+
+rev - Inverte cada login (ex: "postgres" vira "sertgsop")
+
+sort -r - Ordena em ordem alfabética inversa (Z para A)
+
+sed -n "${FT_LINE1},${FT_LINE2}p" - Mantém apenas as linhas entre FT_LINE1 e FT_LINE2 (inclusive)
+
+tr '\n' ',' - Substitui quebras de linha por vírgulas
+
+sed 's/,/, /g' - Adiciona espaço após cada vírgula
+
+sed 's/, $/.\n/' - Remove a última vírgula e espaço, adiciona ponto final e quebra de linha
+
+O comando segue rigorosamente a ordem especificada no enunciado: cat → remove comentários → uma linha a cada duas → inverte logins → ordena alfabeticamente inverso → filtra linhas → formata com vírgulas e ponto final.
