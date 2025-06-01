@@ -12,66 +12,69 @@
 
 #include <unistd.h>
 
-void	ft_putstr(char *str)
+int		ft_validate_base(char *base);
+int		ft_strlen(char *str);
+void	ft_putchar(char c);
+void	ft_recursive_atoa(int nbr, int base_len, char *base);
+
+void	ft_putnbr_base(int nbr, char *base)
 {
-	while (*str)
-		write(1, str++, 1);
+	int		base_len;
+
+	base_len = ft_validate_base(base);
+	if (base_len < 2)
+		return ;
+	else
+	{
+		if (nbr < 0)
+		{
+			write(1, "-", 1);
+			nbr = -nbr;
+		}
+		ft_recursive_atoa(nbr, base_len, base);
+	}
 }
 
-void	ft_increment_string(char *str, int n)
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+int	ft_validate_base(char *base)
 {
 	int	i;
 	int	j;
 
-	i = n - 1;
-	while (i >= 0)
-	{
-		if (str[i] < '9' - (n - 1 - i))
-		{
-			str[i]++;
-			j = i + 1;
-			while (j < n)
-			{
-				str[j] = str[j - 1] + 1;
-				j++;
-			}
-			break ;
-		}
-		i--;
-	}
-}
-
-void	ft_create_strings(int n)
-{
-	char	string_i[11];
-	char	string_f[11];
-	int		i;
-	int		f;
-
 	i = 0;
-	f = 10 - n;
-	while (i < n)
+	while (base[i] != '\0')
 	{
-		string_i[i] = '0' + i;
-		string_f[i] = '0' + f;
+		if (ft_strlen(base) < 2 || base[i] == '+' || base[i] == '-')
+			return (0);
+		j = i + 1;
+		while (base[j] != '\0')
+		{
+			if (base[j] == base[i])
+				return (0);
+			j++;
+		}
 		i++;
-		f++;
 	}
-	string_i[i] = '\0';
-	string_f[i] = '\0';
-	while (1)
-	{
-		ft_putstr(string_i);
-		if (string_i[0] != '9' - n + 1)
-			write(1, ", ", 2);
-		if (string_i[0] == string_f[0] && string_i[n - 1] == string_f[n - 1])
-			break ;
-		ft_increment_string(string_i, n);
-	}
+	return (ft_strlen(base));
 }
 
-void	ft_print_combn(int n)
+void	ft_putchar(char c)
 {
-	if (n > 0 && n < 10)
-		ft_create_strings(n);
+	write(1, &c, 1);
+}
+
+void	ft_recursive_atoa(int nbr, int base_len, char *base)
+{
+	if (nbr >= base_len)
+		ft_recursive_atoa(nbr / base_len, base_len, base);
+	ft_putchar(base[nbr % base_len]);
 }

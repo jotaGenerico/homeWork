@@ -1,0 +1,142 @@
+Explicação linha por linha:
+
+Incluímos apenas <unistd.h> para usar a função write.
+2-5. Declaramos os protótipos das funções que usaremos.
+
+6-18. Função ft_ten_queens_puzzle:
+
+Declaramos um array 'queens' para armazenar as posições das damas.
+Inicializamos o contador 'count' e o índice 'i'.
+Inicializamos todas as posições do array 'queens' com 0.
+Chamamos a função 'solve' para encontrar as soluções.
+Retornamos o número total de soluções.
+19-37. Função solve (recursiva):
+
+Se chegamos à coluna 10, encontramos uma solução válida.
+Imprimimos a solução e incrementamos o contador.
+Para cada linha da coluna atual, tentamos colocar uma dama.
+Se a posição é segura, chamamos recursivamente para a próxima coluna.
+38-55. Função is_safe:
+
+Verifica se é seguro colocar uma dama na posição atual.
+Compara com todas as damas já colocadas.
+Verifica ataques na mesma linha e nas diagonais.
+56-68. Função print_solution:
+
+Imprime a solução encontrada.
+Converte cada número para caractere e usa write para imprimir.
+
+A função principal ft_ten_queens_puzzle inicializa o processo e retorna o número total de soluções encontradas. A função solve faz a maior parte do trabalho, tentando colocar damas em cada coluna e verificando se cada posição é segura.
+
+O que é Backtracking?
+
+Backtracking é uma técnica algorítmica para resolver problemas recursivamente, tentando construir uma solução incrementalmente, uma parte de cada vez, removendo as soluções que falham em satisfazer as restrições do problema em qualquer ponto do tempo (voltando atrás).
+
+Principais características do backtracking:
+
+É uma forma de busca em profundidade.
+Usa recursão para explorar todas as possibilidades.
+Abandona caminhos que não levam à solução (poda).
+Como o Backtracking é usado neste problema:
+
+Construção Incremental:
+Começamos colocando uma dama na primeira coluna.
+Avançamos coluna por coluna, tentando colocar uma dama em cada uma.
+Verificação de Restrições:
+Antes de colocar uma dama, verificamos se a posição é segura (função is_safe).
+Uma posição é considerada segura se nenhuma outra dama pode atacá-la.
+Recursão:
+Se uma posição é segura, avançamos para a próxima coluna (chamada recursiva).
+Se chegarmos à décima coluna com sucesso, encontramos uma solução válida.
+Backtracking (Volta atrás):
+Se não podemos colocar uma dama em nenhuma posição de uma coluna, voltamos para a coluna anterior.
+Isso é feito implicitamente pela natureza da recursão.
+Exploração Completa:
+O algoritmo explora todas as possibilidades válidas.
+Exemplo de como o backtracking funciona neste problema:
+
+Coloca uma dama na primeira coluna, primeira linha.
+Tenta colocar uma dama na segunda coluna, primeira linha.
+Se não for seguro, tenta a segunda linha da segunda coluna, e assim por diante.
+Se nenhuma posição na segunda coluna for segura, volta para a primeira coluna e move a dama para a segunda linha.
+Repete o processo até explorar todas as possibilidades.
+
+void solve(int col, int *queens, int *count)
+{
+    int row;
+
+    if (col == 10)
+    {
+        print_solution(queens);
+        (*count)++;
+        return;
+    }
+    row = 0;
+    while (row < 10)
+    {
+        queens[col] = row;
+        if (is_safe(col, queens))
+            solve(col + 1, queens, count);
+        row++;
+    }
+}
+
+A função solve implementa o backtracking.
+Ela tenta colocar uma dama em cada linha da coluna atual.
+Se uma posição é segura, faz uma chamada recursiva para a próxima coluna.
+Se nenhuma posição na coluna atual é segura, a função retorna, efetivamente voltando atrás.
+O backtracking é muito eficiente para este tipo de problema porque ele pode descartar rapidamente grandes porções do espaço de busca que não levariam a soluções válidas.
+
+Para aprender backtracking, você pode seguir estes passos e estudar os seguintes tópicos:
+
+Fundamentos de programação:
+Dominar uma linguagem de programação (C é uma boa escolha para começar)
+Entender bem estruturas de dados básicas (arrays, listas, pilhas)
+Ter uma boa compreensão de recursão
+Conceitos básicos de algoritmos:
+Complexidade de tempo e espaço
+Busca em profundidade (DFS - Depth-First Search)
+Árvores de busca
+Conceitos específicos de backtracking:
+Estado e espaço de busca
+Função de escolha
+Função de viabilidade
+Função objetivo
+Prática com problemas comuns de backtracking:
+N-Queens (como o problema que você estava resolvendo)
+Sudoku Solver
+Palavra cruzada
+Labirinto
+Subconjuntos de um conjunto
+Permutações
+Técnicas de otimização:
+Poda (pruning)
+Ordenação de escolhas
+Memorização
+Recursos para aprender:
+
+Livros:
+"Introduction to Algorithms" por Cormen, Leiserson, Rivest, e Stein
+"Algorithm Design" por Kleinberg e Tardos
+Cursos online:
+Cursos de algoritmos em plataformas como Coursera, edX, ou Udacity
+Vídeos no YouTube sobre backtracking (canais como mycodeschool, GeeksforGeeks)
+Websites de programação competitiva:
+LeetCode
+HackerRank
+CodeForces
+TopCoder
+Prática:
+Comece com problemas simples e vá aumentando a complexidade
+Implemente soluções do zero, sem olhar respostas prontas
+Analise diferentes soluções para o mesmo problema
+Visualização:
+Use ferramentas de visualização de algoritmos para entender melhor como o backtracking funciona
+Dicas para aprender backtracking:
+
+Entenda bem a recursão antes de mergulhar no backtracking
+Pratique desenhando árvores de decisão para problemas simples
+Comece com problemas pequenos e aumente gradualmente a complexidade
+Tente explicar o algoritmo em voz alta ou para outra pessoa
+Implemente várias vezes o mesmo problema para fixar o conceito
+Lembre-se, backtracking é uma técnica poderosa, mas requer prática para dominar. Não desanime se parecer difícil no início - com tempo e prática, você vai pegar o jeito!

@@ -12,66 +12,49 @@
 
 #include <unistd.h>
 
-void	ft_putstr(char *str)
+void	ft_ultimate_ft(int *********nbr);
+
+int	main(void)
 {
-	while (*str)
-		write(1, str++, 1);
-}
+	char	buffer[2];
 
-void	ft_increment_string(char *str, int n)
-{
-	int	i;
-	int	j;
+	int		nbr;
+	int		*ptr1;
+	int		**ptr2;
+	int		***ptr3;
+	int		****ptr4;
+	int		*****ptr5;
+	int		******ptr6;
+	int		*******ptr7;
+	int		********ptr8;
+	int		*********ptr9;
 
-	i = n - 1;
-	while (i >= 0)
-	{
-		if (str[i] < '9' - (n - 1 - i))
-		{
-			str[i]++;
-			j = i + 1;
-			while (j < n)
-			{
-				str[j] = str[j - 1] + 1;
-				j++;
-			}
-			break ;
-		}
-		i--;
-	}
-}
+	nbr = 0;
+	ptr1 = &nbr;
+	ptr2 = &ptr1;
+	ptr3 = &ptr2;
+	ptr4 = &ptr3;
+	ptr5 = &ptr4;
+	ptr6 = &ptr5;
+	ptr7 = &ptr6;
+	ptr8 = &ptr7;
+	ptr9 = &ptr8;
 
-void	ft_create_strings(int n)
-{
-	char	string_i[11];
-	char	string_f[11];
-	int		i;
-	int		f;
+	buffer[0] = '0' + (nbr / 10);
+	buffer[1] = '0' + (nbr % 10);
 
-	i = 0;
-	f = 10 - n;
-	while (i < n)
-	{
-		string_i[i] = '0' + i;
-		string_f[i] = '0' + f;
-		i++;
-		f++;
-	}
-	string_i[i] = '\0';
-	string_f[i] = '\0';
-	while (1)
-	{
-		ft_putstr(string_i);
-		if (string_i[0] != '9' - n + 1)
-			write(1, ", ", 2);
-		if (string_i[0] == string_f[0] && string_i[n - 1] == string_f[n - 1])
-			break ;
-		ft_increment_string(string_i, n);
-	}
-}
+	write(1, "Valor original: ", 16);
+	write(1, buffer, 1);
+	write(1, "\n", 1);
 
-void	ft_print_combn(int n)
-{
-	if (n > 0 && n < 10)
-		ft_create_strings(n);
+	ft_ultimate_ft(ptr9);
+
+	buffer[0] = '0' + (*********ptr9 / 10);
+	buffer[1] = '0' + (*********ptr9 % 10);
+
+	write(1, "Valor alterado: ", 16);
+	write(1, buffer, 2);
+	write(1, "\n", 1);
+
+	return (0);
 }

@@ -10,68 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdio.h>
 
-void	ft_putstr(char *str)
-{
-	while (*str)
-		write(1, str++, 1);
-}
+void	ft_rev_int_tab(int *tab, int size);
 
-void	ft_increment_string(char *str, int n)
+int	main(void)
 {
+	int	size;
+	int	array[10];
 	int	i;
-	int	j;
 
-	i = n - 1;
-	while (i >= 0)
-	{
-		if (str[i] < '9' - (n - 1 - i))
-		{
-			str[i]++;
-			j = i + 1;
-			while (j < n)
-			{
-				str[j] = str[j - 1] + 1;
-				j++;
-			}
-			break ;
-		}
-		i--;
-	}
-}
-
-void	ft_create_strings(int n)
-{
-	char	string_i[11];
-	char	string_f[11];
-	int		i;
-	int		f;
-
+	size = 10;
 	i = 0;
-	f = 10 - n;
-	while (i < n)
+	while (i < size)
 	{
-		string_i[i] = '0' + i;
-		string_f[i] = '0' + f;
+		array[i] = i;
 		i++;
-		f++;
 	}
-	string_i[i] = '\0';
-	string_f[i] = '\0';
-	while (1)
+	printf("Array ordenado:\n");
+	i = 0;
+	while (i < size)
 	{
-		ft_putstr(string_i);
-		if (string_i[0] != '9' - n + 1)
-			write(1, ", ", 2);
-		if (string_i[0] == string_f[0] && string_i[n - 1] == string_f[n - 1])
-			break ;
-		ft_increment_string(string_i, n);
+		printf("%d ", array[i]);
+		i++;
 	}
-}
-
-void	ft_print_combn(int n)
-{
-	if (n > 0 && n < 10)
-		ft_create_strings(n);
+	ft_rev_int_tab(array, size);
+	printf("\nArray invertido:\n");
+	i = 0;
+	while (i < size)
+	{
+		printf("%d ", array[i]);
+		i++;
+	}
+	printf("\n");
+	return (0);
 }
