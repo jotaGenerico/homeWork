@@ -40,12 +40,8 @@ int main(int argc, char **argv)
 	else
 	{
 		if (is_palindrome(argv[1]))
-		{
 			ft_print(argv[1]);
-			write(1, "\n", 1);
-		}
-		else
-			write(1, "\n", 1);
 	}
+	write(1, "\n", 1);
 	return (0);
 }
