@@ -52,9 +52,11 @@ int	ft_check_base(char *base)
 {
 	int	i;
 	int	j;
+	int	b_len;
 
 	i = 0;
-	if (ft_strlen(base) <= 1)
+	b_len = ft_strlen(base);
+	if (b_len <= 1)
 		return (0);
 	while (base[i])
 	{

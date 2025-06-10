@@ -8,7 +8,7 @@ char *ft_strstr(char *str, char *to_find) {
         char *s1 = str;
         char *s2 = to_find;
 
-        while (*s1 && *s2 && *s1 == *s2) {
+        while (*s1 && *s1 == *s2) {
             s1++;
             s2++;
         }

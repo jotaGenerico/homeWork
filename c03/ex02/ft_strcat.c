@@ -1,7 +1,8 @@
-char	*ft_strcat(char *dest, char *src);
-
 char	*ft_strcat(char *dest, char *src)
 {
+	char	*start;
+
+	start = dest;
 	while (*dest)
 		dest++;
 	while (*src)
@@ -11,5 +12,5 @@ char	*ft_strcat(char *dest, char *src)
 		src++;
 	}
 	*dest = '\0';
-	return (dest);
+	return (start);
 }

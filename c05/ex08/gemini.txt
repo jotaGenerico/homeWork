@@ -1,0 +1,269 @@
+Sua intuição está correta, o problema das N-Rainhas (e nesse caso, 10-Rainhas) é um clássico em ciência da computação e é resolvido usando uma técnica poderosa chamada backtracking (retrocesso), que é um dos usos mais elegantes da recursividade. Ver que você o enfrentou no Rush com o Skyscraper me mostra que você já tem a garra para lidar com isso!
+
+O Problema das 10 Rainhas
+O objetivo é colocar 10 rainhas em um tabuleiro de xadrez de 10x10 de forma que nenhuma rainha ataque a outra.
+
+As regras de ataque da rainha são:
+
+Horizontal: Ataca qualquer peça na mesma linha.
+
+Vertical: Ataca qualquer peça na mesma coluna.
+
+Diagonal: Ataca qualquer peça que esteja na mesma diagonal.
+
+A função ft_ten_queens_puzzle deve retornar o número total de soluções únicas e imprimir cada uma dessas soluções no formato exigido pelo enunciado.
+
+A Solução: Backtracking Recursivo
+A forma mais comum de resolver este problema é usando a técnica de backtracking recursivo. A ideia é a seguinte:
+
+Tentativa e Erro: Tentamos colocar uma rainha em uma posição.
+
+Verificação: Verificamos se essa posição é "segura" (se a rainha atacaria alguma rainha já colocada em linhas/colunas anteriores).
+
+Avanço: Se for segura, "colocamos" a rainha e avançamos para a próxima parte do problema (geralmente a próxima linha ou coluna).
+
+Retrocesso (Backtracking): Se a posição não for segura, ou se não conseguimos encontrar uma solução a partir dessa tentativa, nós "desfazemos" a última colocação (voltamos) e tentamos outra opção para aquela rainha.
+
+Sua Solução (ft_ten_queens_puzzle.c)
+A solução que estamos usando é uma implementação padrão e correta do algoritmo de backtracking, adaptada para as exigências da 42 (recursividade, write autorizado, int ft_ten_queens_puzzle(void)).
+
+#include <unistd.h>
+
+static int	is_safe(int col, int *queens);
+static void	print_solution(int *queens);
+static void	solve(int col, int *queens, int *count);
+
+int	ft_ten_queens_puzzle(void)
+{
+	int queens[10];
+	int count;
+	int i;
+
+	count = 0;
+	i = 0;
+	while (i < 10)
+	{
+		queens[i] = 0;
+		i++;
+	}
+	solve(0, queens, &count);
+	return (count);
+}
+
+static void	solve(int col, int *queens, int *count)
+{
+	int row;
+
+	if (col == 10)
+	{
+		print_solution(queens);
+		(*count)++;
+		return ;
+	}
+	row = 0;
+	while (row < 10)
+	{
+		queens[col] = row;
+		if (is_safe(col, queens))
+			solve(col + 1, queens, count);
+		row++;
+	}
+}
+
+static int	is_safe(int col, int *queens)
+{
+	int i;
+	int diff;
+
+	i = 0;
+	while (i < col)
+	{
+		diff = queens[col] - queens[i];
+		if (diff < 0)
+			diff = -diff;
+		if (queens[i] == queens[col] || diff == col - i)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static void	print_solution(int *queens)
+{
+	int		i;
+	char	c;
+
+	i = 0;
+	while (i < 10)
+	{
+		c = queens[i] + '0';
+		write(1, &c, 1);
+		i++;
+	}
+	write(1, "\n", 1);
+}
+
+Entendendo a Lógica do Código Passo a Passo
+Para "enxergar" o backtracking, vamos analisar cada parte do código.
+
+1. A Representação do Tabuleiro: int queens[10]
+O array queens de 10 inteiros é o nosso "tabuleiro".
+
+queens[coluna] armazena a linha em que a rainha na coluna col está posicionada.
+
+Exemplo: Se queens[0] = 3, significa que a rainha na coluna 0 está na linha 3.
+
+Se queens[5] = 8, significa que a rainha na coluna 5 está na linha 8.
+
+Essa representação garante automaticamente que só haverá uma rainha por coluna, pois cada índice do array é uma coluna única. O desafio é garantir que não haja conflitos em linhas ou diagonais.
+
+2. ft_ten_queens_puzzle(void): O Ponto de Partida
+int	ft_ten_queens_puzzle(void)
+{
+	int queens[10]; // Declara o "tabuleiro" (colunas de 0 a 9)
+	int count;      // Contador para o número de soluções encontradas
+	int i;          // Variável auxiliar para inicialização
+
+	count = 0;      // Inicializa o contador de soluções para 0
+	i = 0;
+	while (i < 10)  // Loop para inicializar todas as posições do array 'queens'
+	{
+		queens[i] = 0; // Cada rainha é inicializada na linha 0 (pode ser qualquer valor, será sobrescrito)
+		i++;
+	}
+	// A função recursiva 'solve' é chamada para começar a preencher o tabuleiro.
+	// Iniciamos tentando colocar a primeira rainha na 'coluna 0'.
+	// Passamos o array 'queens' e o endereço de 'count' (usando '&count')
+	// para que a função 'solve' possa modificar o tabuleiro e incrementar o contador de soluções.
+	solve(0, queens, &count);
+	return (count); // Finalmente, retorna o número total de soluções encontradas
+}
+
+Esta é a função principal que será chamada pela Moulinette.
+
+Ela configura o array queens e o contador count, e então inicia o processo de backtracking chamando solve(0, ...) para começar a trabalhar na coluna 0.
+
+3. solve(int col, int *queens, int *count): O Agente de Backtracking (O Cérebro da Recursão)
+Esta é a função recursiva que implementa a estratégia de tentativa e erro. col representa a coluna atual onde estamos tentando posicionar uma rainha.
+
+static void	solve(int col, int *queens, int *count)
+{
+	int row; // Variável para testar cada linha possível na coluna 'col'
+
+	// CASO BASE (Condição de Parada da Recursão):
+	// Se 'col' chegou a 10, significa que conseguimos posicionar rainhas nas colunas de 0 a 9.
+	// Isso indica que uma solução válida (10 rainhas seguras) foi encontrada!
+	if (col == 10)
+	{
+		print_solution(queens); // Imprime esta solução encontrada (ex: "0257948136")
+		(*count)++;             // Incrementa o contador total de soluções
+		return ;                // Retorna da chamada recursiva para explorar outras possibilidades
+	}
+
+	// PASSO RECURSIVO: Tenta colocar uma rainha na 'col'una atual em cada possível 'linha'.
+	row = 0;
+	while (row < 10) // Percorre todas as 'row's (linhas de 0 a 9) para a 'col'una atual
+	{
+		queens[col] = row; // TENTA colocar a rainha: na 'col'una atual, coloque-a na 'row' atual
+
+		// Verifica se essa colocação é segura (não ataca nenhuma rainha já posicionada em colunas anteriores)
+		if (is_safe(col, queens))
+		{
+			// Se for seguro, AVANÇA para a próxima coluna:
+			// Chama 'solve' recursivamente para a PRÓXIMA coluna (col + 1).
+			// Isso é a essência da recursão: "Ok, esta rainha está segura aqui. Agora, tente resolver o resto do problema a partir da próxima coluna."
+			solve(col + 1, queens, count);
+		}
+
+		// BACKTRACKING (implícito):
+		// Se a tentativa atual (queens[col] = row) NÃO foi segura (`is_safe` retornou 0),
+		// OU se a chamada recursiva `solve(col + 1, ...)` retornou (significando que todas as ramificações a partir daquela sub-solução foram exploradas),
+		// então simplesmente passamos para a próxima 'row' no loop.
+		// Não precisamos "remover" a rainha explicitamente de `queens[col]` aqui.
+		// A posição será sobrescrita na próxima iteração do `while` se uma nova `row` for tentada,
+		// ou o contexto da chamada de função vai se encerrar quando a recursão voltar para a chamada anterior.
+		row++; // Tenta a próxima 'row' (linha) para a 'col'una atual
+	}
+}
+
+4. is_safe(int col, int *queens): O Detetive (Verifica Conflitos)
+Esta é uma função auxiliar crucial. Ela verifica se a rainha que acabamos de "tentar" colocar na posição (col, queens[col]) (ou seja, na coluna atual col, na linha queens[col]) está em conflito com as rainhas que já foram posicionadas em colunas anteriores (0 a col - 1).
+
+static int	is_safe(int col, int *queens)
+{
+	int i;    // Iterador para percorrer as colunas já preenchidas (rainhas anteriores)
+	int diff; // Variável auxiliar para calcular a diferença de linhas para verificar diagonais
+
+	i = 0;
+	while (i < col) // Loop pelas colunas ANTERIORES a 'col' (onde já há rainhas posicionadas)
+	{
+		// 1. Conflito na Mesma LINHA:
+		// Verifica se a rainha que estamos tentando colocar na 'col'una atual (queens[col])
+		// está na mesma LINHA que uma rainha já posicionada na 'col'una anterior 'i' (queens[i]).
+		if (queens[i] == queens[col])
+			return (0); // Conflito encontrado: A posição NÃO é segura
+
+		// 2. Conflito na Mesma DIAGONAL:
+		// Um ataque diagonal ocorre quando a diferença ABSOLUTA das linhas
+		// é igual à diferença ABSOLUTA das colunas.
+		// 'queens[col] - queens[i]' é a diferença das linhas.
+		diff = queens[col] - queens[i]; // Calcula a diferença das linhas
+		if (diff < 0)                   // Garante que 'diff' seja o valor absoluto (equivalente a ft_abs())
+			diff = -diff;
+
+		// 'col - i' é a diferença das colunas (sempre positivo, pois 'col' é sempre maior que 'i').
+		// Se a diferença absoluta das linhas é igual à diferença das colunas, é uma diagonal.
+		if (diff == col - i)
+			return (0); // Conflito encontrado: A posição NÃO é segura
+
+		i++; // Vai para a próxima coluna anterior para verificar conflitos
+	}
+	return (1); // Se o loop terminou e nenhum conflito foi encontrado, então a posição é SEGURA
+}
+
+5. print_solution(int *queens): O Relator (Imprime Cada Solução Encontrada)
+static void	print_solution(int *queens)
+{
+	int		i;    // Iterador para percorrer as colunas (0 a 9)
+	char	c;    // Variável para armazenar o caractere a ser impresso
+
+	i = 0;
+	while (i < 10) // Percorre todas as 10 colunas
+	{
+		// Converte o número da linha (que está entre 0 e 9) para o caractere ASCII correspondente.
+		// Ex: se queens[i] é 0, c será '0'. Se queens[i] é 5, c será '5'.
+		c = queens[i] + '0';
+		write(1, &c, 1);     // Escreve o caractere (o dígito da linha da rainha) para a saída padrão (stdout)
+		i++;
+	}
+	write(1, "\n", 1);       // Adiciona uma nova linha após imprimir todos os dígitos de uma solução, conforme o formato exigido
+}
+
+Recapitulando o Fluxo do Backtracking
+Imagine o programa tentando montar a solução linha por linha (ou coluna por coluna, na sua representação):
+
+Começa na Coluna 0: A função solve(0, ...) é chamada.
+
+Tenta Linha 0: Coloca a rainha na coluna 0, linha 0 (queens[0] = 0). is_safe verifica. Se for segura, avança.
+
+Avança para Coluna 1: Chama solve(1, ...)
+
+Tenta Linha 0 (da Coluna 1): Coloca a rainha na coluna 1, linha 0 (queens[1] = 0). is_safe verifica. Conflito! (Mesma linha com queens[0]). Não é segura.
+
+Backtrack: solve(1, ...) não chama mais solve(2, ...). O loop interno de solve(1, ...) continua para a próxima linha (row = 1).
+
+Tenta Linha 1 (da Coluna 1): Coloca queens[1] = 1. is_safe verifica. Se for segura, avança.
+
+Avança para Coluna 2: Chama solve(2, ...)
+
+... e assim por diante.
+
+Se em algum momento is_safe retorna 0, a chamada recursiva não acontece. O loop while(row < 10) simplesmente continua para a próxima linha na coluna atual. Isso é a "poda" da árvore de busca, evitando tentar combinações inválidas.
+
+Quando col chega a 10, uma solução completa é encontrada e impressa.
+
+Espero que essa explicação detalhada, com foco nos porquês de cada parte, ajude você a "enxergar" o funcionamento do backtracking neste problema.
+
+Por favor, me diga se alguma parte ainda está confusa ou se você tem mais perguntas. Não há problema em revisar quantas vezes for necessário!
+
+Quando estiver pronto, podemos ir para o main de testes para essa solução e ver o resultado na prática!

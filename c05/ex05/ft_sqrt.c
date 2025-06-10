@@ -1,33 +1,17 @@
-// uma delas deu runtime nao lembro exatamente qual foi mas chutaria a primeira
-int	ft_sqrt(int nb)
+static int	recursive_sqrt_finder(int nb, long long candidate)
 {
-	int	result;
-
-	if (nb < 0)
+	if (candidate * candidate == nb)
+		return ((int)candidate);
+	if (candidate * candidate > nb || candidate > 46341)
 		return (0);
-	result = 0;
-	while (nb > 0)
-	{
-		nb -= result * 2 + 1;
-		if (nb < 0)
-			return (0);
-		result++;
-	}
-	return (result);
+	return (recursive_sqrt_finder(nb, candidate + 1));
 }
 
-int ft_sqrt(int nb)
+int	ft_sqrt(int nb)
 {
-	int sqrt;
-
-	sqrt = 1;
 	if (nb < 0)
 		return (0);
-	while (sqrt * sqrt <= nb)
-	{
-		if (sqrt * sqrt == nb)
-			return (sqrt);
-		sqrt++;
-	}
-	return (0);
+	if (nb == 0)
+		return (0);
+	return (recursive_sqrt_finder(nb, 1));
 }
