@@ -20,7 +20,7 @@ int	main(void)
 	int		nbr;
 	int		*ptr;
 
-	nbr = 0;
+	nbr = 24;
 	ptr = &nbr;
 	write(1, "valor original\n", 15);
 	ft_print(nbr);

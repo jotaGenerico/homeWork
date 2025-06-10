@@ -1,3 +1,1 @@
 ls -pt | grep -v "^\." | tr '\n' ',' | sed 's/,/, /g' | sed 's/, $/\n/'
-
-ls -tpm

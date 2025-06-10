@@ -1,4 +1,14 @@
-void	ft_sort_int_tab(int *tab, int size);
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_int_tab.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jose-cad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/02 08:07:00 by jose-cad          #+#    #+#             */
+/*   Updated: 2025/06/02 08:31:57 by jose-cad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 void	ft_sort_int_tab(int *tab, int size)
 {
@@ -19,7 +29,7 @@ void	ft_sort_int_tab(int *tab, int size)
 				tab[j] = temp;
 			}
 			else
-				break;
+				break ;
 			j--;
 		}
 		i++;

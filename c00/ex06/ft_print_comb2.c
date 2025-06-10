@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_comb2.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jose-cad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/30 14:18:49 by jose-cad          #+#    #+#             */
+/*   Updated: 2025/05/30 14:19:28 by jose-cad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
 void	ft_putchar(char c);
@@ -36,9 +48,4 @@ void	ft_putnbr(int first, int second)
 	write(1, " ", 1);
 	ft_putchar(second / 10 + '0');
 	ft_putchar(second % 10 + '0');
-}
-
-int main(void){
-	ft_print_comb2();
-	return 0;
 }
